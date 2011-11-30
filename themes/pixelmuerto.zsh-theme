@@ -1,5 +1,5 @@
 # inspirated in { kolo alanpeabody nanotech }.zsh-theme
-# inspirated in https://github.com/lvv/git-prompt 
+# inspirated in https://github.com/lvv/git-prompt
 autoload -U colors && colors
 
 autoload -Uz vcs_info
@@ -12,10 +12,14 @@ zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
 zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:git*+set-message:*' hooks git-abbrv-master
+function +vi-git-abbrv-master(){
+    hook_com[branch]=${hook_com[branch]/#%master/M}
+}
 
 # check new commits in remote branchs
 function git_remotes() {
-  git_dir=$(git rev-parse --git-dir 2> /dev/null ) || return 
+  git_dir=$(git rev-parse --git-dir 2> /dev/null ) || return
   remotes=""
   if [[ -n $git_dir ]]; then
 	  if [[ $(git branch | awk '{ print $2}') == "master" ]]; then
