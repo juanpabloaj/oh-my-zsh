@@ -20,6 +20,7 @@ function +vi-git-abbrv-master(){
 # check new commits in remote branchs
 function git_remotes() {
   git_dir=$(git rev-parse --git-dir 2> /dev/null ) || return
+    [[ $(git remote) == "" ]] && return
   remotes=""
   if [[ -n $git_dir ]]; then
 	  if [[ $(git branch | sed -e '/^[^*]/d' | awk '{print $2}') == "master" ]]; then
